@@ -1,0 +1,17 @@
+---
+#  tasks file for server
+- name: Wait for token
+  ansible.builtin.wait_for:
+    path: data/node-token
+    timeout: 600
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  connection: local
+- name: Install K3S
+  ansible.builtin.command:
+    argv:
+      - /home/{{ ansible_user }}/k3s_installer
+      - "{{ k3s_installer_options }}"
+    creates: "/usr/local/bin/kubectl"
+  environment:
+    K3S_TOKEN: "{{ lookup('file', 'data/node-token') }}"
