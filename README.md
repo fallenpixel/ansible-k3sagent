@@ -1,4 +1,4 @@
-Role Name
+fallenpixel.k3sagent
 =========
 
 An ansible role that installs a K3S agent. Token is read from `data` folder
